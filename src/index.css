@@ -5,8 +5,24 @@
 body {
   background-color: #edf2f4;
 }
+main {
+  margin: 10px;
+}
+h1, h2, h3, h4 {
+  margin: 10px 0px;
+}
 h1, h2, h3, h4, p {
   color: #2b2d42;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.textCenter {
+  text-align: center;
 }
 
 .flex {

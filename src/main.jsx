@@ -23,6 +23,11 @@ const router = createBrowserRouter([
     element: <LogOut/>,
   },
   {
+    path: "/account/:user",
+    action: ({ params }) => {},
+    element: <App data={1}/>,
+  },
+  {
     path: "*",
     element: (
       <p>Page Not Found</p>
@@ -33,6 +38,8 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <NavBar/>
-    <RouterProvider router={router} />
+    <main>
+      <RouterProvider router={router} />
+    </main>
   </StrictMode>,
 );

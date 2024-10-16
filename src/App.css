@@ -1,0 +1,40 @@
+.ranking, .textInput, button[type="submit"] {
+  margin: 10px 0px;
+  border-radius: 5px;
+  font-size: 1.5em;
+  height: 50px;
+}
+
+.ranking {
+  width: 90vw;
+  border: solid 2px #8d99ae;
+}
+.ranking > div {
+  height: 100%;
+}
+
+.textInput {
+  display: block;
+  width: 500px;
+  background-color: transparent;
+  border: solid 2px #8d99ae;
+}
+
+button[type="submit"] {
+  background-color: #ef233c;
+  width: 110px;
+  border: none;
+}
+
+@media screen and (max-width: 900px) {
+  .textInput, button[type="submit"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .textInput {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75vw;
+  }
+}

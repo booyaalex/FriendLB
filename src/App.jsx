@@ -1,12 +1,42 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient('https://ughstfzbqkwwurstknii.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnaHN0ZnpicWt3d3Vyc3RrbmlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg5OTUwMTUsImV4cCI6MjA0NDU3MTAxNX0.cu67rZh9rNVouXFZpa5ypYiYFz8EUGAIH8dMDMy9TDo');
 
 export function App() {
+  const [state, setState] = useState([]);
+  useEffect(() => {
+    getUserData().then((r) => {
+      //Rank scores from greatest to least
+      const userArray = [];
+      const userMap = new Map();
+      for (let i = 0; i < r.length; i++) {
+        userArray.push(Number(r[i].totalWins.total) + (i * 0.00001)); //By making each score unique, you can use a map to get a users data by their score.
+        userMap.set(userArray[i], r[i]);
+      }
+      userArray.sort(function (a, b) { return b - a; }); //Sorts integers in array GTL
+
+      //Put scores into HTML
+      const children = userArray.map((val) => (
+        <div key={userMap.get(val).id} className="ranking center">
+          <div className="flex verticalCenter">
+            <p>#1</p>
+            <p>{userMap.get(val).userName}: {userMap.get(val).totalWins.total}</p>
+          </div>
+        </div>
+      ));
+      setState(children);
+    });
+  }, [state]); //To put it simply, useEffect can be used to update values that are unsyncronized, or come from async functions. Hard to explain.
+
   return (
     <>
-      <h1>Friend Leaderboards</h1>
+      <h1 className="textCenter">Friend Leaderboards</h1>
+      <h2 className="textCenter">Current Standings</h2>
+      <div>
+        {state}
+      </div>
     </>
   );
 }
@@ -14,11 +44,10 @@ export function App() {
 export function LogIn() {
   return (
     <>
-      <h1>Log In</h1>
-      <input id="emailInput" type="email" placeholder="email"></input>
+      <h1 className="textCenter">Log In</h1>
       <br />
-      <input id="passwordInput" type="password" placeholder="password"></input>
-      <br />
+      <input id="emailInput" className="textInput" type="email" placeholder="email"></input>
+      <input id="passwordInput" className="textInput" type="password" placeholder="password"></input>
       <button type="submit" onClick={userLogIn.bind()}>Log In</button>
       <br />
       <a href="./signup">Sign Up</a>
@@ -29,15 +58,16 @@ export function LogIn() {
 export function SignUp() {
   return (
     <>
-      <h1>Sign Up</h1>
-      <input id="usernameInput" type="text" placeholder="username"></input>
+      <h1 className="textCenter">Sign Up</h1>
+      <input id="usernameInput" className="textInput" type="text" placeholder="username"></input>
       <br />
-      <input id="emailInput" type="email" placeholder="email"></input>
+      <input id="emailInput" className="textInput" type="email" placeholder="email"></input>
       <br />
-      <input id="passwordInput" type="password" placeholder="password"></input>
+      <input id="passwordInput" className="textInput" type="password" placeholder="password"></input>
       <br />
       <p>I can see your passwords, so don't use the password you normally use.</p>
       <button type="submit" onClick={userSignUp.bind()}>Sign Up</button>
+      <p id="confirmation"></p>
     </>
   );
 }
@@ -52,8 +82,8 @@ export function LogOut() {
   );
 }
 
+
 async function userLogIn() {
-  console.log("sdujiof");
   const email = document.getElementById("emailInput").value;
   const password = document.getElementById("passwordInput").value;
 
@@ -65,11 +95,16 @@ async function userLogIn() {
     }
   });
   console.log(data);
-  if(error) {
+  if (error) {
     alert(error);
   } else {
-    window.location.href = "./";
+    //window.location.href = "./";
   }
+}
+
+async function getUserData() {
+  const { data, error } = await supabase.from('Users').select();
+  return data;
 }
 
 async function userSignUp() {
@@ -87,6 +122,15 @@ async function userSignUp() {
       }
     }
   });
+  if (error) {
+    alert(error);
+  } else {
+    const { error2 } = await supabase.from('Users').insert({ id: data.user.id, userName: data.user.user_metadata.userName, totalWins: { "total": 0, "domino": 0, "crazyEight": 0 } });
+    if (error2) {
+      alert(error2);
+    }
+    document.getElementById("confirmation").innerHTML = "Check your email to activate your account! Then log in!";
+  }
 }
 
 async function userLogOut() {
