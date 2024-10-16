@@ -9,8 +9,20 @@
   width: 90vw;
   border: solid 2px #8d99ae;
 }
+.ranking.gold {
+  background-color: yellow;
+}
+.ranking.silver {
+  background-color: slategrey;
+}
+.ranking.bronze {
+  background-color: brown;
+}
 .ranking > div {
   height: 100%;
+}
+.ranking > div > p {
+  margin: 5px;
 }
 
 .textInput {

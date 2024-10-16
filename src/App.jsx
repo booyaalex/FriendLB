@@ -18,15 +18,26 @@ export function App() {
       userArray.sort(function (a, b) { return b - a; }); //Sorts integers in array GTL
 
       //Put scores into HTML
-      const children = userArray.map((val) => (
-        <div key={userMap.get(val).id} className="ranking center">
-          <div className="flex verticalCenter">
-            <p>#1</p>
-            <p>{userMap.get(val).userName}: {userMap.get(val).totalWins.total}</p>
+      const elements = [];
+      for (let i = 0; i < userArray.length; i++) {
+        let specialRanking;
+        if(i == 0) {
+          specialRanking = "gold";
+        } else if(i == 1) {
+          specialRanking = "silver";
+        } else if(i == 2) {
+          specialRanking = "bronze";
+        }  
+        elements.push(
+          <div key={userMap.get(userArray[i]).id} className={"ranking " + specialRanking + " center"}>
+            <div className="flex verticalCenter">
+              <p>#{i + 1}:</p>
+              <p>{userMap.get(userArray[i]).userName}: {userMap.get(userArray[i]).totalWins.total}</p>
+            </div>
           </div>
-        </div>
-      ));
-      setState(children);
+        );
+      }
+      setState(elements);
     });
   }, [state]); //To put it simply, useEffect can be used to update values that are unsyncronized, or come from async functions. Hard to explain.
 
