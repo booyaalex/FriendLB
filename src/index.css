@@ -1,3 +1,24 @@
 * {
   margin: 0;
+  font-family: Montserrat;
+}
+body {
+  background-color: #edf2f4;
+}
+h1, h2, h3, h4, p {
+  color: #2b2d42;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex.center {
+  justify-content: center;
+}
+.flex.verticalCenter {
+  align-items: center;
+}
+.flex.between {
+  justify-content: space-between;
 }

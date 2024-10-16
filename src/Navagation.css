@@ -1,0 +1,11 @@
+#navBar {
+  width: 100vw;
+  height: 12vh;
+  background-color: #ef233c;
+  font-size: 2em;
+}
+#navBar a {
+  margin: 5px;
+  color: #edf2f4;
+  cursor: pointer;
+}

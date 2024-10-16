@@ -1,7 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { App, SignUp } from './App.jsx';
+import { NavBar } from './Navagation.jsx';
+import { App, LogIn, SignUp, LogOut } from './App.jsx';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -10,8 +11,16 @@ const router = createBrowserRouter([
     element: <App/>,
   },
   {
+    path: "/login",
+    element: <LogIn/>,
+  },
+  {
     path: "/signup",
     element: <SignUp/>,
+  },
+  {
+    path: "/logout",
+    element: <LogOut/>,
   },
   {
     path: "*",
@@ -23,6 +32,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <NavBar/>
     <RouterProvider router={router} />
   </StrictMode>,
 );

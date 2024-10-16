@@ -11,6 +11,21 @@ export function App() {
   );
 }
 
+export function LogIn() {
+  return (
+    <>
+      <h1>Log In</h1>
+      <input id="emailInput" type="email" placeholder="email"></input>
+      <br />
+      <input id="passwordInput" type="password" placeholder="password"></input>
+      <br />
+      <button type="submit" onClick={userLogIn.bind()}>Log In</button>
+      <br />
+      <a href="./signup">Sign Up</a>
+    </>
+  );
+}
+
 export function SignUp() {
   return (
     <>
@@ -27,6 +42,36 @@ export function SignUp() {
   );
 }
 
+export function LogOut() {
+  userLogOut();
+  return (
+    <>
+      <p>Successfully logged out!(Hopefully)</p>
+      <a href="./">Go Home</a>
+    </>
+  );
+}
+
+async function userLogIn() {
+  console.log("sdujiof");
+  const email = document.getElementById("emailInput").value;
+  const password = document.getElementById("passwordInput").value;
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+    options: {
+      emailRedirectTo: './'
+    }
+  });
+  console.log(data);
+  if(error) {
+    alert(error);
+  } else {
+    window.location.href = "./";
+  }
+}
+
 async function userSignUp() {
   const username = document.getElementById("usernameInput").value;
   const email = document.getElementById("emailInput").value;
@@ -36,10 +81,14 @@ async function userSignUp() {
     email: email,
     password: password,
     options: {
+      shouldCreateUser: false,
       data: {
         userName: username,
-        password: password,
       }
     }
   });
+}
+
+async function userLogOut() {
+  const { error } = await supabase.auth.signOut();
 }
