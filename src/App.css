@@ -6,23 +6,52 @@
 }
 
 .ranking {
-  width: 90vw;
+  cursor: pointer;
+  width: 90%;
   border: solid 2px #8d99ae;
 }
 .ranking.gold {
-  background-color: yellow;
+  background-color: #ffd700;
+  border: none;
+  padding: 2px;
 }
 .ranking.silver {
-  background-color: slategrey;
+  background-color: #c0c0c0;
+  border: none;
+  padding: 2px;
 }
 .ranking.bronze {
-  background-color: brown;
+  background-color: #cd7f32;
+  border: none;
+  padding: 2px;
 }
 .ranking > div {
   height: 100%;
 }
 .ranking > div > p {
   margin: 5px;
+}
+
+.subRankings {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-areas: "a b";
+  column-gap: 20px;
+}
+
+.subRankings > div {
+  width: 100%;
+  background-color: #ef233c;
+  border-radius: 10px;
+  margin: 20px 0px;
+  cursor: pointer;
+}
+
+#profileImg {
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .textInput {
@@ -33,13 +62,20 @@
 }
 
 button[type="submit"] {
+  cursor: pointer;
   background-color: #ef233c;
   width: 110px;
   border: none;
 }
 
-@media screen and (max-width: 900px) {
-  .textInput, button[type="submit"] {
+@media screen and (max-width: 768px) {
+  .subRankings {
+    grid-template-areas: "a";
+  }
+  .user {
+    flex-direction: column;
+  }
+  #profileImg, .textInput, button[type="submit"] {
     display: block;
     margin-left: auto;
     margin-right: auto;
