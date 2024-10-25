@@ -8,32 +8,32 @@ import './index.css';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/FriendLB/",
     element: <App/>,
   },
   {
-    path: "/home",
+    path: "/FriendLB/home",
     element: <App/>,
   },
   {
-    path: "/login",
+    path: "/FriendLB/login",
     element: <LogIn/>,
   },
   {
-    path: "/signup",
+    path: "/FriendLB/signup",
     element: <SignUp/>,
   },
   {
-    path: "/logout",
+    path: "/FriendLB/logout",
     element: <LogOut/>,
   },
   {
-    path: "/account/:user",
+    path: "/FriendLB/account/:user",
     action: ({ params }) => {},
     element: <Account />,
   },
   {
-    path: "/game/:game",
+    path: "/FriendLB/game/:game",
     action: ({ params }) => {},
     element: <Game />,
   },
