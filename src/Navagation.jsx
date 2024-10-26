@@ -15,13 +15,13 @@ export function NavBar() {
           <h4>Heya, {name}!</h4>
         </div>
         <div className="flex">
-          <a href="../home">
+          <a href="./">
             <i className="fa-solid fa-house"></i>
           </a>
-          <a href="../login">
+          <a href="./login">
             <i className="fa-solid fa-user-tie"></i>
           </a>
-          <a href="../logout">
+          <a href="./logout">
             <i className="fa-solid fa-right-from-bracket"></i>
           </a>
         </div>

@@ -2,40 +2,30 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { NavBar } from './Navagation.jsx';
-import { App, Account, Game, LogIn, SignUp, LogOut } from './App.jsx';
-
+import { App, LogIn, SignUp, LogOut } from './App.jsx';
 import './index.css';
 
 const router = createBrowserRouter([
   {
-    path: "/FriendLB/",
+    path: "/",
     element: <App/>,
   },
   {
-    path: "/FriendLB/home",
-    element: <App/>,
-  },
-  {
-    path: "/FriendLB/login",
+    path: "/login",
     element: <LogIn/>,
   },
   {
-    path: "/FriendLB/signup",
+    path: "/signup",
     element: <SignUp/>,
   },
   {
-    path: "/FriendLB/logout",
+    path: "/logout",
     element: <LogOut/>,
   },
   {
-    path: "/FriendLB/account/:user",
+    path: "/account/:user",
     action: ({ params }) => {},
-    element: <Account />,
-  },
-  {
-    path: "/FriendLB/game/:game",
-    action: ({ params }) => {},
-    element: <Game />,
+    element: <App data={1}/>,
   },
   {
     path: "*",
