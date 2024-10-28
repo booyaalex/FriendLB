@@ -282,6 +282,7 @@ async function userLogIn() {
   if (error) {
     alert(error);
   } else {
+    const { error2 } = await supabase.from('Users').insert({ id: data.user.id, userName: data.user.user_metadata.userName, totalWins: { "total": 0, "domino": 0, "crazyEights": 0 } });
     window.location.href = "./";
   }
 }
