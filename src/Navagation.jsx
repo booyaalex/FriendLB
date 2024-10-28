@@ -12,7 +12,7 @@ export function NavBar() {
     <>
       <nav id="navBar" className="flex between verticalCenter">
         <div>
-          <h4>Heya, {name}!</h4>
+          <h4 id="greetingText">Heya, {name}!</h4>
         </div>
         <div className="flex">
           <a href="../home">
